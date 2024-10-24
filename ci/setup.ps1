@@ -2,7 +2,7 @@ function SetupVsToolsPath {
     # from https://allen-mack.blogspot.com/2008/03/replace-visual-studio-command-prompt.html
 
     # split location to shorten the command
-    Push-Location 'C:\Program Files (x86)\Microsoft Visual Studio\2017'
+    Push-Location 'C:\Program Files\Microsoft Visual Studio\2022'
     Push-Location '.\Community\VC\Auxiliary\Build'
 
     cmd /c "vcvars64.bat&set" |

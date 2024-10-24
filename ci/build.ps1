@@ -7,7 +7,7 @@ function SetupVsToolsPath {
     # from https://allen-mack.blogspot.com/2008/03/replace-visual-studio-command-prompt.html
 
     # split location to shorten the command
-    Push-Location 'C:\Program Files (x86)\Microsoft Visual Studio\2017'
+    Push-Location 'C:\Program Files\Microsoft Visual Studio\2022'
     Push-Location '.\Community\VC\Auxiliary\Build'
 
     cmd /c "vcvars64.bat&set" |
@@ -26,8 +26,6 @@ $curConfig = $env:CONFIGURATION
 
 $isMsvcBuild = $curBuildCombo -eq 'windows-msvc'
 
-$clangFsOption = 'DPKG_USE_CLANG_FSAPI=OFF';
-
 Write-Host "Running build script..."
 Write-Host "Current script build combo is: $curBuildCombo $curConfig"
 
@@ -43,7 +41,6 @@ switch ($curBuildCombo) {
     "linux-clang" {
         $targetCompilerCC = 'clang-8'
         $targetCompilerCXX = 'clang++-8'
-        $clangFsOption = 'DPKG_USE_CLANG_FSAPI=ON';
         break
     }
     "windows-mingw" {
@@ -54,7 +51,7 @@ switch ($curBuildCombo) {
     "windows-msvc" {
         $targetCompilerCC = 'cl'
         $targetCompilerCXX = 'cl'
-        # add msvc 17 tools to path
+        # add msvc tools to path
         SetupVsToolsPath
         break
     }
@@ -74,7 +71,7 @@ CreateDirectory ./build
 Push-Location ./build
 
 if ($isMsvcBuild) {
-    cmake -G "Visual Studio 15 2017" -A "x64" ../ 
+    cmake -G "Visual Studio 17 2022" -A "x64" ../ 
 }
 else {
     cmake -G "Ninja" `
