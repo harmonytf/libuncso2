@@ -1,8 +1,8 @@
 #include "ciphers/aescipher.hpp"
 
-#include <aes.h>
-#include <filters.h>
-#include <modes.h>
+#include <cryptopp/aes.h>
+#include <cryptopp/filters.h>
+#include <cryptopp/modes.h>
 
 namespace uc2
 {

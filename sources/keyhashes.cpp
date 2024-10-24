@@ -3,8 +3,8 @@
 #include <stdexcept>
 #include <string>
 
-#include <hex.h>
-#include <md5.h>
+#include <cryptopp/hex.h>
+#include <cryptopp/md5.h>
 
 namespace uc2
 {

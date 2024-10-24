@@ -1,8 +1,8 @@
 #include "ciphers/descipher.hpp"
 
-#include <des.h>
-#include <filters.h>
-#include <modes.h>
+#include <cryptopp/des.h>
+#include <cryptopp/filters.h>
+#include <cryptopp/modes.h>
 
 namespace uc2
 {

@@ -1,9 +1,9 @@
 [submodule "external/catch2"]
 	path = external/catch2
 	url = https://github.com/catchorg/Catch2
-[submodule "external/cryptopp-cmake"]
-	path = external/cryptopp-cmake
-	url = https://github.com/noloader/cryptopp-cmake/
 [submodule "external/cryptopp"]
 	path = external/cryptopp
 	url = https://github.com/weidai11/cryptopp
+[submodule "external/cryptopp-cmake"]
+	path = external/cryptopp-cmake
+	url = https://github.com/abdes/cryptopp-cmake.git

@@ -1,8 +1,8 @@
 #include "ciphers/blowfishcipher.hpp"
 
-#include <blowfish.h>
-#include <filters.h>
-#include <modes.h>
+#include <cryptopp/blowfish.h>
+#include <cryptopp/filters.h>
+#include <cryptopp/modes.h>
 
 namespace uc2
 {
