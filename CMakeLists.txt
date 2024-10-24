@@ -170,7 +170,7 @@ source_group("Source Files" FILES ${PKG_SOURCES_BASE})
 source_group("Public Header Files" FILES ${PKG_PUBLIC_HEADERS_BASE})
 source_group("Header Files" FILES ${PKG_HEADERS_BASE})
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_definitions(-DCMAKE_EXPORT_COMPILE_COMMANDS=ON)
@@ -194,7 +194,7 @@ set_target_properties(uncso2 PROPERTIES VERSION ${LIB_VERSION})
 # Enable all warnings
 #
 if(MSVC)
-  target_compile_options(uncso2 PRIVATE /W4)
+  target_compile_options(uncso2 PRIVATE /DWIN32 /D_WINDOWS /W4 /EHsc)
 else()
   target_compile_options(uncso2 PRIVATE -Wall -Wextra -pedantic)
 endif()
