@@ -73,7 +73,7 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: libuncso2
+        name: libuncso2-${{ matrix.c_compiler }}-${{ matrix.os }}
         path: build/
 
     - name: Test
