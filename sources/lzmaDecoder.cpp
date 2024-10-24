@@ -27,11 +27,11 @@
 #include "lzmaDecoder.h"
 
 // Allocator to pass to LZMA functions
-static void* SzAlloc(ISzAllocPtr p, std::size_t size)
+static void* SzAlloc(ISzAllocPtr, std::size_t size)
 {
     return malloc(size);
 }
-static void SzFree(ISzAllocPtr p, void* address)
+static void SzFree(ISzAllocPtr, void* address)
 {
     free(address);
 }
@@ -75,7 +75,7 @@ unsigned int CLZMA::GetActualSize(unsigned char* pInput)
 // adequate sized output buffer or memory corruption will occur.
 //-----------------------------------------------------------------------------
 /* static */
-unsigned int CLZMA::Uncompress(unsigned char* pInput, unsigned char* pOutput)
+size_t CLZMA::Uncompress(unsigned char* pInput, unsigned char* pOutput)
 {
     lzma_header_t* pHeader = (lzma_header_t*)pInput;
     if (pHeader->id != LZMA_ID)
@@ -161,10 +161,10 @@ bool CLZMAStream::CreateDecoderState(const unsigned char* pProperties)
 
 // Attempt to read up to nMaxInputBytes from the compressed stream, writing up
 // to nMaxOutputBytes to pOutput. Returns false if read stops due to an error.
-bool CLZMAStream::Read(unsigned char* pInput, unsigned int nMaxInputBytes,
-                       unsigned char* pOutput, unsigned int nMaxOutputBytes,
-                       /* out */ unsigned int& nCompressedBytesRead,
-                       /* out */ unsigned int& nOutputBytesWritten)
+bool CLZMAStream::Read(unsigned char* pInput, size_t nMaxInputBytes,
+                       unsigned char* pOutput, size_t nMaxOutputBytes,
+                       /* out */ size_t& nCompressedBytesRead,
+                       /* out */ size_t& nOutputBytesWritten)
 {
     nCompressedBytesRead = 0;
     nOutputBytesWritten = 0;
@@ -173,7 +173,7 @@ bool CLZMAStream::Read(unsigned char* pInput, unsigned int nMaxInputBytes,
     // Check for initial chunk of data
     if (!m_bParsedHeader)
     {
-        unsigned int nBytesConsumed = 0;
+        size_t nBytesConsumed = 0;
         eHeaderParse parseResult =
             TryParseHeader(pInput, nMaxInputBytes, nBytesConsumed);
 
@@ -280,8 +280,8 @@ void CLZMAStream::InitZIPHeader(unsigned int nCompressedSize,
 }
 
 CLZMAStream::eHeaderParse CLZMAStream::TryParseHeader(
-    unsigned char* pInput, unsigned int nBytesAvailable,
-    /* out */ unsigned int& nBytesConsumed)
+    unsigned char* pInput, size_t nBytesAvailable,
+    /* out */ size_t& nBytesConsumed)
 {
     nBytesConsumed = 0;
 
@@ -316,8 +316,7 @@ CLZMAStream::eHeaderParse CLZMAStream::TryParseHeader(
             return eHeaderParse_Fail;
         }
 
-        if (nBytesAvailable <
-            static_cast<unsigned int>(nLZMAPropertiesSize) + 4)
+        if (nBytesAvailable < static_cast<size_t>(nLZMAPropertiesSize) + 4)
         {
             return eHeaderParse_NeedMoreBytes;
         }

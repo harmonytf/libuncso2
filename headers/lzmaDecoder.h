@@ -38,7 +38,7 @@ class CLZMAStream;
 class CLZMA
 {
 public:
-	static unsigned int	Uncompress( unsigned char *pInput, unsigned char *pOutput );
+	static size_t		Uncompress( unsigned char *pInput, unsigned char *pOutput );
 	static bool			IsCompressed( unsigned char *pInput );
 	static unsigned int	GetActualSize( unsigned char *pInput );
 };
@@ -63,9 +63,10 @@ public:
 	// Attempt to read up to nMaxInputBytes from the compressed stream, writing up to nMaxOutputBytes to pOutput.
 	// Makes progress until blocked on input or output.
 	// Returns false if read stops due to an error or if called at EOF (GetExpectedBytesRemaining == 0)
-	bool Read( unsigned char *pInput, unsigned int nMaxInputBytes,
-	           unsigned char *pOutput, unsigned int nMaxOutputBytes,
-	           /* out */ unsigned int &nCompressedBytesRead, /* out */ unsigned int &nOutputBytesWritten );
+    bool Read(unsigned char* pInput, size_t nMaxInputBytes,
+              unsigned char* pOutput, size_t nMaxOutputBytes,
+              /* out */ size_t& nCompressedBytesRead,
+              /* out */ size_t& nOutputBytesWritten);
 
 	// Get the expected uncompressed bytes yet to be read from this stream. Returns false if not yet known, such as
 	// before being fed the header.
@@ -79,7 +80,8 @@ private:
 		eHeaderParse_NeedMoreBytes
 	};
 
-	eHeaderParse TryParseHeader( unsigned char *pInput, unsigned int nBytesAvailable, /* out */ unsigned int &nBytesConsumed );
+	eHeaderParse TryParseHeader(unsigned char* pInput, size_t nBytesAvailable,
+                                /* out */ size_t& nBytesConsumed);
 
 	void FreeDecoderState();
 	bool CreateDecoderState( const unsigned char *pProperties );
@@ -87,10 +89,10 @@ private:
 	// Init from a zip-embedded LZMA stream. Requires the original size be passed from zip headers.
 	CLzmaDec_t *m_pDecoderState;
 
-	unsigned int m_nActualSize;
-	unsigned int m_nActualBytesRead;
-	unsigned int m_nCompressedSize;
-	unsigned int m_nCompressedBytesRead;
+	size_t m_nActualSize;
+    size_t m_nActualBytesRead;
+    size_t m_nCompressedSize;
+    size_t m_nCompressedBytesRead;
 
 	// If we have read past the header
 	bool m_bParsedHeader   : 1;
