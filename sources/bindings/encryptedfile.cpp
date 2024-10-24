@@ -20,7 +20,7 @@ extern "C"
                                                              keyCollectionView);
             return reinterpret_cast<EncryptedFile_t>(newPkg.release());
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return NULL;
         }
@@ -63,7 +63,7 @@ extern "C"
 
             return true;
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return false;
         }

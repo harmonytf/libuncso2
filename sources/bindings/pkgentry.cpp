@@ -25,7 +25,7 @@ extern "C"
 
             return true;
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return false;
         }
@@ -45,7 +45,7 @@ extern "C"
         {
             return pEntry->GetFilePath().data();
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return NULL;
         }
@@ -65,7 +65,7 @@ extern "C"
         {
             return pEntry->GetPkgFileOffset();
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return 0;
         }
@@ -85,7 +85,7 @@ extern "C"
         {
             return pEntry->GetEncryptedSize();
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return 0;
         }
@@ -105,7 +105,7 @@ extern "C"
         {
             return pEntry->GetDecryptedSize();
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return 0;
         }
@@ -124,7 +124,7 @@ extern "C"
         {
             return pEntry->IsEncrypted();
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return false;
         }

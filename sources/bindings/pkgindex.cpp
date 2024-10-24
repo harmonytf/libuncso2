@@ -20,7 +20,7 @@ extern "C"
                                                         keyCollectionView);
             return reinterpret_cast<PkgIndex_t>(newPkg.release());
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return NULL;
         }
@@ -60,7 +60,7 @@ extern "C"
             pIndex->ValidateHeader();
             return true;
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return false;
         }
@@ -80,7 +80,7 @@ extern "C"
             pIndex->Parse();
             return true;
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return false;
         }
@@ -100,7 +100,7 @@ extern "C"
         {
             return pPkg->GetFilenames().size();
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return 0;
         }
@@ -121,7 +121,7 @@ extern "C"
             return reinterpret_cast<const char* const*>(
                 pPkg->GetFilenames().data());
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return 0;
         }

@@ -13,7 +13,7 @@ extern "C"
                 reinterpret_cast<uint8_t*>(texBuffer), texSize);
             return reinterpret_cast<LzmaTexture_t>(newTex.release());
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return NULL;
         }
@@ -39,7 +39,7 @@ extern "C"
         {
             return pTex->GetOriginalSize();
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return 0;
         }
@@ -71,7 +71,7 @@ extern "C"
             return pTex->Decompress(reinterpret_cast<uint8_t*>(outBuffer),
                                     outBufferSize);
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return 0;
         }

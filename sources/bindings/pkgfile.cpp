@@ -20,7 +20,7 @@ extern "C"
                 filename, dataView, szEntryKey, szDataKey, pOptions);
             return reinterpret_cast<PkgFile_t>(newPkg.release());
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return NULL;
         }
@@ -127,7 +127,7 @@ extern "C"
         {
             return pPkg->GetFullHeaderSize();
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return 0;
         }
@@ -147,7 +147,7 @@ extern "C"
             pPkg->DecryptHeader();
             return true;
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return false;
         }
@@ -167,7 +167,7 @@ extern "C"
             pPkg->Parse();
             return true;
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return false;
         }
@@ -186,7 +186,7 @@ extern "C"
         {
             return pPkg->GetEntries().size();
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return 0;
         }
@@ -205,7 +205,7 @@ extern "C"
         {
             return reinterpret_cast<PkgEntry_t*>(pPkg->GetEntries().data());
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return 0;
         }

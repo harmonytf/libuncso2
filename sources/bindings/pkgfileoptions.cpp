@@ -11,7 +11,7 @@ extern "C"
             auto newOptions = uc2::PkgFileOptions::Create();
             return reinterpret_cast<PkgFile_t>(newOptions.release());
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return NULL;
         }
@@ -38,7 +38,7 @@ extern "C"
         {
             pOptions->SetTfoPkg(state);
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return;
         }
@@ -58,7 +58,7 @@ extern "C"
         {
             return pOptions->IsTfoPkg();
         }
-        catch (const std::exception& e)
+        catch (const std::exception&)
         {
             return false;
         }
