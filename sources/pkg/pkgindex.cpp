@@ -12,7 +12,7 @@ namespace uc2
 constexpr const std::uint16_t SUPPORTED_PKG_VERSION = 2;
 
 std::vector<std::string_view> SplitTextFileByLine(
-    gsl::span<std::uint8_t> fileBuffer)
+    std::span<std::uint8_t> fileBuffer)
 {
     constexpr std::string_view szNewLine("\r\n", 2);
 
@@ -46,8 +46,8 @@ PkgIndex::ptr_t PkgIndex::Create(
 }
 
 PkgIndex::ptr_t PkgIndexImpl::CreateSpan(
-    std::string_view indexFilename, gsl::span<std::uint8_t> fileDataView,
-    gsl::span<const std::uint8_t[4][16]> keyCollectionView)
+    std::string_view indexFilename, std::span<std::uint8_t> fileDataView,
+    std::span<const std::uint8_t[4][16]> keyCollectionView)
 {
     return std::make_unique<PkgIndexImpl>(indexFilename, fileDataView,
                                           keyCollectionView);
@@ -66,8 +66,8 @@ PkgIndexImpl::PkgIndexImpl(std::string_view indexFilename,
 }
 
 PkgIndexImpl::PkgIndexImpl(
-    std::string_view indexFilename, gsl::span<std::uint8_t> fileDataView,
-    gsl::span<const std::uint8_t[4][16]> keyCollectionView)
+    std::string_view indexFilename, std::span<std::uint8_t> fileDataView,
+    std::span<const std::uint8_t[4][16]> keyCollectionView)
     : m_szvIndexFilename(indexFilename), m_FileDataView(fileDataView),
       m_KeyCollectionView(keyCollectionView), m_bHeaderValidated(false)
 {
@@ -81,7 +81,7 @@ void PkgIndexImpl::SetKeyCollection(const std::uint8_t (*keyCollection)[4][16])
 }
 
 void PkgIndexImpl::SetKeyCollectionSpan(
-    gsl::span<const std::uint8_t[4][16]> keyCollectionView)
+    std::span<const std::uint8_t[4][16]> keyCollectionView)
 {
     this->m_KeyCollectionView = keyCollectionView;
 }

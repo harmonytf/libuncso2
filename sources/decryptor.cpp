@@ -81,9 +81,9 @@ std::vector<std::uint8_t> CDecryptor::Decrypt(
 std::size_t CDecryptor::Decrypt(const void* pStart, void* pOutBuffer,
                                 const std::size_t iLength) const
 {
-    gsl::span<const std::uint8_t> inData(
+    std::span<const std::uint8_t> inData(
         static_cast<const std::uint8_t*>(pStart), iLength);
-    gsl::span<std::uint8_t> outData(static_cast<std::uint8_t*>(pOutBuffer),
+    std::span<std::uint8_t> outData(static_cast<std::uint8_t*>(pOutBuffer),
                                     iLength);
     return this->m_pCipher->Decrypt(inData, outData);
 }
@@ -91,9 +91,9 @@ std::size_t CDecryptor::Decrypt(const void* pStart, void* pOutBuffer,
 std::size_t CDecryptor::DecryptInBuffer(void* pBuffer,
                                         const std::size_t iLength) const
 {
-    gsl::span<const std::uint8_t> inData(
+    std::span<const std::uint8_t> inData(
         static_cast<const std::uint8_t*>(pBuffer), iLength);
-    gsl::span<std::uint8_t> outData(static_cast<std::uint8_t*>(pBuffer),
+    std::span<std::uint8_t> outData(static_cast<std::uint8_t*>(pBuffer),
                                     iLength);
     return this->m_pCipher->Decrypt(inData, outData);
 }
@@ -103,7 +103,7 @@ std::vector<std::uint8_t> CDecryptor::Decrypt(const void* pStart,
 {
     std::vector<std::uint8_t> vOutData(iLength);
 
-    gsl::span<const std::uint8_t> inData(
+    std::span<const std::uint8_t> inData(
         static_cast<const std::uint8_t*>(pStart), iLength);
 
     this->m_pCipher->Decrypt(inData, vOutData);

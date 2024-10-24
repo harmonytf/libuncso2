@@ -7,6 +7,3 @@
 [submodule "external/cryptopp"]
 	path = external/cryptopp
 	url = https://github.com/weidai11/cryptopp
-[submodule "external/gsl-lite"]
-	path = external/gsl-lite
-	url = https://github.com/martinmoene/gsl-lite

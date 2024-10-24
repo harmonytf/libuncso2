@@ -37,7 +37,7 @@ PkgEntryImpl::PkgEntryImpl(std::string_view szFilePath,
                            std::uint64_t pkgFileOffset,
                            std::uint64_t encryptedSize,
                            std::uint64_t decryptedSize, bool isEncrypted,
-                           gsl::span<std::uint8_t> fileDataView,
+                           std::span<std::uint8_t> fileDataView,
                            std::string_view szvPkgKey /*= {}*/)
     : m_FileDataView(fileDataView), m_szFilePath(MakeUnixSeparated(szFilePath)),
       m_iPkgFileOffset(pkgFileOffset), m_iEncryptedSize(encryptedSize),
@@ -184,13 +184,13 @@ std::pair<std::uint8_t*, std::uint64_t> PkgEntryImpl::HandlePlainFile(
     return { pFileStart, iTargetDecDataSize };
 }
 
-void PkgEntryImpl::SetDataBufferView(gsl::span<std::uint8_t> newDataView)
+void PkgEntryImpl::SetDataBufferView(std::span<std::uint8_t> newDataView)
 {
     this->m_FileDataView = newDataView;
 }
 
 void PkgEntryImpl::ReleaseDataBufferView()
 {
-    this->m_FileDataView = gsl::span<std::uint8_t>();
+    this->m_FileDataView = std::span<std::uint8_t>();
 }
 }  // namespace uc2

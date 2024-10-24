@@ -204,7 +204,6 @@ libuncso2 uses the following libraries:
 
 - [Catch2](https://github.com/catchorg/Catch2) (used in the test application), Boost Software License.
 - [Crypto++](https://www.cryptopp.com/), Public domain.
-- [GSL Lite](https://github.com/martinmoene/gsl-lite), MIT license.
 - [LZMA SDK](https://www.7-zip.org/sdk.html), Public domain.
 
 ## License

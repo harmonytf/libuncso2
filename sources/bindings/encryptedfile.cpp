@@ -8,10 +8,10 @@ extern "C"
         const char* filename, void* dataBuffer, uint64_t dataSize,
         const uint8_t (*keyCollection)[4][16])
     {
-        gsl::span<uint8_t> dataView(reinterpret_cast<uint8_t*>(dataBuffer),
+        std::span<uint8_t> dataView(reinterpret_cast<uint8_t*>(dataBuffer),
                                     dataSize);
 
-        gsl::span<const uint8_t[4][16]> keyCollectionView(keyCollection,
+        std::span<const uint8_t[4][16]> keyCollectionView(keyCollection,
                                                           16 * 4);
 
         try

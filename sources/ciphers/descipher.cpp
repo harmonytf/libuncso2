@@ -18,8 +18,8 @@ void CDesCipher::Initialize(std::string_view key, std::string_view iv,
     this->m_bPaddingEnabled = paddingEnabled;
 }
 
-std::uint64_t CDesCipher::Decrypt(gsl::span<const std::uint8_t> inData,
-                                  gsl::span<std::uint8_t> outBuffer)
+std::uint64_t CDesCipher::Decrypt(std::span<const std::uint8_t> inData,
+                                  std::span<std::uint8_t> outBuffer)
 {
     CryptoPP::CBC_Mode<CryptoPP::DES>::Decryption dec;
 

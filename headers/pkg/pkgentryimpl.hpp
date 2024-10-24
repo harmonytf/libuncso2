@@ -2,7 +2,7 @@
 
 #include "pkgentry.hpp"
 
-#include <gsl/gsl>
+#include <span>
 #include <string>
 #include <string_view>
 
@@ -13,7 +13,7 @@ class PkgEntryImpl : public PkgEntry
 public:
     PkgEntryImpl(std::string_view filePath, std::uint64_t pkgFileOffset,
                  std::uint64_t encryptedSize, std::uint64_t decryptedSize,
-                 bool isEncrypted, gsl::span<std::uint8_t> fileData,
+                 bool isEncrypted, std::span<std::uint8_t> fileData,
                  std::string_view szvPkgKey = {});
     virtual ~PkgEntryImpl() override;
 
@@ -27,7 +27,7 @@ public:
     virtual std::uint64_t GetDecryptedSize() override;
     virtual bool IsEncrypted() override;
 
-    void SetDataBufferView(gsl::span<std::uint8_t> newDataView);
+    void SetDataBufferView(std::span<std::uint8_t> newDataView);
     void ReleaseDataBufferView();
 
 private:
@@ -37,7 +37,7 @@ private:
         const std::uint64_t iBytesToDecrypt) const noexcept;
 
 private:
-    gsl::span<std::uint8_t> m_FileDataView;
+    std::span<std::uint8_t> m_FileDataView;
 
     std::string m_szHashedKey;
 

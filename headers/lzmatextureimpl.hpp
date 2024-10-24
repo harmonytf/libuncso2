@@ -2,7 +2,7 @@
 
 #include "lzmatexture.hpp"
 
-#include <gsl/gsl>
+#include <span>
 
 namespace uc2
 {
@@ -28,7 +28,7 @@ class LzmaTextureImpl : public LzmaTexture
 {
 public:
     LzmaTextureImpl(std::vector<std::uint8_t>& texData);
-    LzmaTextureImpl(gsl::span<std::uint8_t> texDataView);
+    LzmaTextureImpl(std::span<std::uint8_t> texDataView);
     virtual ~LzmaTextureImpl();
 
     virtual std::uint64_t GetOriginalSize() override;
@@ -36,9 +36,9 @@ public:
     virtual bool Decompress(std::uint8_t* outBuffer,
                             std::uint64_t outBufferSize) override;
 
-    static bool IsLzmaTextureSpan(gsl::span<std::uint8_t> texData);
+    static bool IsLzmaTextureSpan(std::span<std::uint8_t> texData);
 
 private:
-    gsl::span<std::uint8_t> m_TexDataView;
+    std::span<std::uint8_t> m_TexDataView;
 };
 }  // namespace uc2

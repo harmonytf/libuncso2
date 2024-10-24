@@ -36,7 +36,7 @@ std::uint64_t PkgFile::GetHeaderSize(bool bTfoPkg)
 }
 
 PkgFile::ptr_t PkgFileImpl::CreateSpan(std::string szFilename,
-                                       gsl::span<std::uint8_t> fileData,
+                                       std::span<std::uint8_t> fileData,
                                        std::string szEntryKey /*= {}*/,
                                        std::string szDataKey /*= {}*/,
                                        PkgFileOptions* pOptions /* = nullptr*/)
@@ -58,7 +58,7 @@ PkgFileImpl::PkgFileImpl(std::string szFilename,
 }
 
 PkgFileImpl::PkgFileImpl(std::string szFilename,
-                         gsl::span<std::uint8_t> fileData,
+                         std::span<std::uint8_t> fileData,
                          std::string szEntryKey /*= {}*/,
                          std::string szDataKey /*= {}*/,
                          PkgFileOptions* pOptions /* = nullptr*/)
@@ -151,7 +151,7 @@ void PkgFileImpl::SetDataBuffer(std::vector<std::uint8_t>& newFileData)
     this->UpdateEntriesDataView();
 }
 
-void PkgFileImpl::SetDataBufferSpan(gsl::span<std::uint8_t> newDataBuffer)
+void PkgFileImpl::SetDataBufferSpan(std::span<std::uint8_t> newDataBuffer)
 {
     this->m_FileDataView = newDataBuffer;
     this->UpdateEntriesDataView();

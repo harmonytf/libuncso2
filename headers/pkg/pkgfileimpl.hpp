@@ -2,7 +2,7 @@
 
 #include "pkgfile.hpp"
 
-#include <gsl/gsl>
+#include <span>
 #include <string>
 
 #include "pkg/pkgstructures.hpp"
@@ -15,7 +15,7 @@ public:
     PkgFileImpl(std::string szFilename, std::vector<std::uint8_t>& fileData,
                 std::string szEntryKey = {}, std::string szDataKey = {},
                 PkgFileOptions* options = nullptr);
-    PkgFileImpl(std::string szFilename, gsl::span<std::uint8_t> fileDataView,
+    PkgFileImpl(std::string szFilename, std::span<std::uint8_t> fileDataView,
                 std::string szEntryKey = {}, std::string szDataKey = {},
                 PkgFileOptions* pOptions = nullptr);
     virtual ~PkgFileImpl() override;
@@ -27,7 +27,7 @@ public:
     virtual void SetTfoPkg(bool bNewState) override;
 
     virtual void SetDataBuffer(std::vector<std::uint8_t>& newFileData) override;
-    void SetDataBufferSpan(gsl::span<std::uint8_t> newDataBuffer);
+    void SetDataBufferSpan(std::span<std::uint8_t> newDataBuffer);
     virtual void ReleaseDataBuffer() override;
 
     virtual std::uint64_t GetFullHeaderSize() override;
@@ -40,7 +40,7 @@ public:
     virtual std::vector<entryptr_t>& GetEntries() override;
 
     static ptr_t CreateSpan(std::string szFilename,
-                            gsl::span<std::uint8_t> fileDataView = {},
+                            std::span<std::uint8_t> fileDataView = {},
                             std::string szEntryKey = {},
                             std::string szDataKey = {},
                             PkgFileOptions* pOptions = nullptr);
@@ -78,7 +78,7 @@ private:
 
     std::string m_szMd5Hash;
 
-    gsl::span<std::uint8_t> m_FileDataView;
+    std::span<std::uint8_t> m_FileDataView;
 
     std::vector<std::unique_ptr<PkgEntry>> m_Entries;
 

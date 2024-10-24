@@ -24,12 +24,13 @@ EncryptedFile::ptr_t EncryptedFile::Create(
     const std::uint64_t iDataSize, const std::uint8_t (&keyCollection)[4][16])
 {
     return EncryptedFileImpl::CreateSpan(
-        fileName, gsl::span<std::uint8_t>(pData, iDataSize), keyCollection);
+        fileName, std::span<std::uint8_t>(pData, iDataSize),
+        { &keyCollection, 1 });
 }
 
 EncryptedFile::ptr_t EncryptedFileImpl::CreateSpan(
-    std::string_view fileName, gsl::span<std::uint8_t> fileDataView,
-    gsl::span<const std::uint8_t[4][16]> keyCollectionView)
+    std::string_view fileName, std::span<std::uint8_t> fileDataView,
+    std::span<const std::uint8_t[4][16]> keyCollectionView)
 {
     return std::make_unique<EncryptedFileImpl>(fileName, fileDataView,
                                                keyCollectionView);
@@ -38,7 +39,7 @@ EncryptedFile::ptr_t EncryptedFileImpl::CreateSpan(
 bool EncryptedFile::IsEncryptedFile(std::uint8_t* pData,
                                     const std::uint64_t iDataSize)
 {
-    gsl::span<std::uint8_t> dataView(pData, iDataSize);
+    std::span<std::uint8_t> dataView(pData, iDataSize);
 
     if (iDataSize < sizeof(EncryptedFileHeader_t))
     {
@@ -84,8 +85,8 @@ EncryptedFileImpl::EncryptedFileImpl(std::string_view fileName,
 }
 
 EncryptedFileImpl::EncryptedFileImpl(
-    std::string_view fileName, gsl::span<std::uint8_t> fileDataView,
-    gsl::span<const std::uint8_t[4][16]> keyCollectionView)
+    std::string_view fileName, std::span<std::uint8_t> fileDataView,
+    std::span<const std::uint8_t[4][16]> keyCollectionView)
     : m_szvFileName(fileName), m_FileDataView(fileDataView),
       m_KeyCollectionView(keyCollectionView)
 {

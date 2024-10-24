@@ -9,7 +9,7 @@ extern "C"
         const char* szEntryKey, const char* szDataKey,
         PkgFileOptions_t options /*= NULL*/)
     {
-        gsl::span<uint8_t> dataView(reinterpret_cast<uint8_t*>(dataBuffer),
+        std::span<uint8_t> dataView(reinterpret_cast<uint8_t*>(dataBuffer),
                                     dataSize);
 
         auto pOptions = reinterpret_cast<uc2::PkgFileOptions*>(options);
@@ -95,7 +95,7 @@ extern "C"
 
         auto pPkg = reinterpret_cast<uc2::PkgFileImpl*>(pkgHandle);
 
-        gsl::span<uint8_t> dataView(reinterpret_cast<uint8_t*>(dataBuffer),
+        std::span<uint8_t> dataView(reinterpret_cast<uint8_t*>(dataBuffer),
                                     dataSize);
 
         pPkg->SetDataBufferSpan(dataView);

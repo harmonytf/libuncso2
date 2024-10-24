@@ -48,7 +48,6 @@ set(PKG_GENERATED_DIR "${CMAKE_BINARY_DIR}/generated")
 
 set(PKG_LIB_CRYPTOPP_DIR "${PKG_LIBS_DIR}/cryptopp")
 set(PKG_LIB_CRYPTOPP_CMAKE_DIR "${PKG_LIBS_DIR}/cryptopp-cmake")
-set(PKG_LIB_GSL_DIR "${PKG_LIBS_DIR}/gsl-lite")
 set(PKG_LIB_LZMA_DIR "${PKG_LIBS_DIR}/lzma")
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
@@ -207,8 +206,7 @@ target_include_directories(uncso2 PRIVATE "${PKG_PUBLIC_HEADERS_DIR}")
 
 target_include_directories(uncso2
                            PRIVATE "${LZMA_INCLUDE_DIR}"
-                                   "${CryptoPP_INCLUDE_DIRS}"
-                                   "${PKG_LIB_GSL_DIR}/include")
+                                   "${CryptoPP_INCLUDE_DIRS}")
 
 # the generated version header's directory
 target_include_directories(uncso2 PRIVATE ${PKG_GENERATED_DIR})

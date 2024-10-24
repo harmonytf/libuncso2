@@ -18,8 +18,8 @@ void CAesCipher::Initialize(std::string_view key, std::string_view iv,
     this->m_bPaddingEnabled = paddingEnabled;
 }
 
-std::uint64_t CAesCipher::Decrypt(gsl::span<const std::uint8_t> inData,
-                                  gsl::span<std::uint8_t> outBuffer)
+std::uint64_t CAesCipher::Decrypt(std::span<const std::uint8_t> inData,
+                                  std::span<std::uint8_t> outBuffer)
 {
     CryptoPP::CBC_Mode<CryptoPP::AES>::Decryption dec;
 

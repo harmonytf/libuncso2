@@ -16,7 +16,7 @@ LzmaTexture::ptr_t LzmaTexture::Create(std::uint8_t* pData,
                                        const std::uint64_t iDataSize)
 {
     return std::make_unique<LzmaTextureImpl>(
-        gsl::span<std::uint8_t>(pData, iDataSize));
+        std::span<std::uint8_t>(pData, iDataSize));
 }
 
 LzmaTextureImpl::LzmaTextureImpl(std::vector<std::uint8_t>& texData)
@@ -29,7 +29,7 @@ LzmaTextureImpl::LzmaTextureImpl(std::vector<std::uint8_t>& texData)
     }
 }
 
-LzmaTextureImpl::LzmaTextureImpl(gsl::span<std::uint8_t> texDataView)
+LzmaTextureImpl::LzmaTextureImpl(std::span<std::uint8_t> texDataView)
     : m_TexDataView(texDataView)
 {
     if (LzmaTexture::IsLzmaTexture(this->m_TexDataView.data(),
@@ -98,7 +98,7 @@ bool LzmaTextureImpl::Decompress(std::uint8_t* outBuffer,
 bool LzmaTexture::IsLzmaTexture(std::uint8_t* pData,
                                 const std::uint64_t iDataSize)
 {
-    gsl::span<std::uint8_t> dataView(pData, iDataSize);
+    std::span<std::uint8_t> dataView(pData, iDataSize);
     return LzmaTextureImpl::IsLzmaTextureSpan(dataView);
 }
 
@@ -107,7 +107,7 @@ std::uint64_t LzmaTexture::GetHeaderSize()
     return sizeof(LzmaVtfHeader_t);
 }
 
-bool LzmaTextureImpl::IsLzmaTextureSpan(gsl::span<std::uint8_t> texData)
+bool LzmaTextureImpl::IsLzmaTextureSpan(std::span<std::uint8_t> texData)
 {
     const std::uint64_t iFileDataSize = texData.size_bytes();
 

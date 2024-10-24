@@ -10,7 +10,7 @@ namespace uc2
 {
 std::vector<std::uint8_t> GeneratePkgIndexKey(
     int iKey, std::string_view szPkgName,
-    gsl::span<const std::uint8_t[4][16]> keyCollectionView)
+    std::span<const std::uint8_t[4][16]> keyCollectionView)
 {
     constexpr const std::uint32_t iVersion = 2;
     static_assert(sizeof(iVersion) == 4, "iVersion's size must be 4 bytes");
