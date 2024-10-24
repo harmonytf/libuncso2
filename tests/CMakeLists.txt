@@ -21,7 +21,7 @@ set(PKG_TESTS_TFO_NEXON_SOURCES
     "tfo/nexon/test_pkgindex.cpp"
     "tfo/nexon/settings.hpp")
 
-set(PKG_TESTS_SOURCES_BASE "test_main.cpp" "utils.cpp")
+set(PKG_TESTS_SOURCES_BASE "utils.cpp")
 
 set(PKG_TESTS_HEADERS_BASE "utils.hpp")
 
@@ -45,13 +45,7 @@ target_include_directories(pkg_test
 target_include_directories(pkg_test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_subdirectory(${PKG_LIB_CATCH_DIR} catch)
-target_link_libraries(pkg_test Catch2::Catch2)
-
-if(PKG_USE_CLANG_FSAPI)
-  target_link_libraries(pkg_test c++abi c++fs)
-elseif(NOT MSVC)
-  target_link_libraries(pkg_test stdc++fs)
-endif()
+target_link_libraries(pkg_test Catch2::Catch2WithMain)
 
 target_link_libraries(pkg_test uncso2)
 
@@ -63,3 +57,13 @@ file(GLOB PKG_TEST_REQUIRED_FILES "${CMAKE_CURRENT_SOURCE_DIR}/gamefiles/*")
 foreach(file ${PKG_TEST_REQUIRED_FILES})
   configure_file(${file} "${CMAKE_CURRENT_BINARY_DIR}/" COPYONLY)
 endforeach()
+
+add_custom_command(
+        TARGET pkg_test POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_CURRENT_BINARY_DIR}/../uncso2.dll
+                ${CMAKE_CURRENT_BINARY_DIR})
+
+include(CTest)
+include(Catch)
+catch_discover_tests(pkg_test)
