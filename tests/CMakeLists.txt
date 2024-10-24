@@ -58,11 +58,13 @@ foreach(file ${PKG_TEST_REQUIRED_FILES})
   configure_file(${file} "${CMAKE_CURRENT_BINARY_DIR}/" COPYONLY)
 endforeach()
 
-add_custom_command(
-        TARGET pkg_test POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_CURRENT_BINARY_DIR}/../uncso2.dll
-                ${CMAKE_CURRENT_BINARY_DIR})
+if(WIN32)
+  add_custom_command(
+          TARGET pkg_test POST_BUILD
+          COMMAND ${CMAKE_COMMAND} -E copy
+                  ${CMAKE_CURRENT_BINARY_DIR}/../uncso2.dll
+                  ${CMAKE_CURRENT_BINARY_DIR})
+endif()
 
 include(CTest)
 include(Catch)
