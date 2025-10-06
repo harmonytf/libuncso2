@@ -65,8 +65,8 @@ generate_libuc2_version(VERSION_FILE
 # Dependencies
 #
 
-add_subdirectory("${PKG_LIB_CRYPTOPP_CMAKE_DIR}")
 set(CRYPTOPP_SOURCES "${PKG_LIB_CRYPTOPP_DIR}")
+add_subdirectory("${PKG_LIB_CRYPTOPP_CMAKE_DIR}")
 
 # Enable weak namespace for MD5
 add_definitions(-DCRYPTOPP_ENABLE_NAMESPACE_WEAK=1)
