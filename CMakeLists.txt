@@ -210,3 +210,10 @@ if(PKG_BUILD_TESTS)
   message("libuncso2: Building tests")
   add_subdirectory(tests)
 endif()
+
+#
+# Installation rules
+#
+
+install(TARGETS uncso2 DESTINATION lib)
+install(DIRECTORY ${PKG_PUBLIC_HEADERS_ROOT_DIR}/ DESTINATION include/libuncso2)

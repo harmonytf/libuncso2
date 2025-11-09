@@ -53,3 +53,9 @@
 *.AppImage
 
 /CMakeUserPresets.json
+
+# Arch Linux
+/.SRCINFO
+/src
+/pkg
+*.tar.zst

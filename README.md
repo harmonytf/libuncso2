@@ -9,8 +9,9 @@ It's based on the ekey's reversing work of at [XeNTaX's forums](https://forum.xe
 Used as the back-end for the GUI program [UnCSO2](https://github.com/harmonytf/UnCSO2).
 
 Tested on:
-- GNU/Linux - GCC 8.3.0 (64 bits)
-- GNU/Linux - Clang 8.0.0 (64 bits)
+
+- GNU/Linux - GCC 15.2.1 (64 bits)
+- GNU/Linux - Clang 21.1.4 (64 bits)
 - Windows 10 - MSVC 2022 (64 bits)
 
 ## Features
