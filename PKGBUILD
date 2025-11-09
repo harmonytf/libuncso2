@@ -7,13 +7,14 @@ url="https://github.com/harmonytf/libuncso2"
 license=(GPL-3.0-only)
 makedepends=(cmake)
 source=()
+_sourcedir="$pkgname"
 
 prepare() {
 	ln -snf "$startdir" "$srcdir"
 }
 
 build() {
-	cmake -B build -S "$pkgname" \
+	cmake -B build -S "$_sourcedir" \
         -DCMAKE_BUILD_TYPE=RelWithDebInfo \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -Wno-dev
@@ -21,12 +22,12 @@ build() {
 }
 
 check() {
-    # TODO: Currently broken
-	ctest --test-dir "$pkgname/build" --output-on-failure
+	ctest --test-dir "$_sourcedir/build/tests" --build-config RelWithDebInfo --output-on-failure
 }
 
 package() {
 	DESTDIR="$pkgdir" cmake --install build
+    install -Dm644 "$_sourcedir/COPYING" -t "$pkgdir/usr/share/licenses/$pkgname"
 
     rm -rf "$pkgdir/usr/bin/cryptest"
     rm -rf "$pkgdir/usr/include/cryptopp"
@@ -36,5 +37,5 @@ package() {
     rm -rf "$pkgdir/usr/share/pkgconfig/cryptopp.pc"
 
     rm -rf "$pkgdir/usr/bin"
-    rm -rf "$pkgdir/usr/share"
+    rm -rf "$pkgdir/usr/share/pkgconfig"
 }
