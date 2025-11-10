@@ -1,7 +1,7 @@
 pkgname=libuncso2
 pkgver=1.2.0
 pkgrel=1
-pkgdesc="Backend for UnCSO2 (binary release)"
+pkgdesc="Backend for UnCSO2"
 arch=(any)
 url="https://github.com/harmonytf/libuncso2"
 license=(GPL-3.0-only)

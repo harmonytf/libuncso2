@@ -1,5 +1,10 @@
 # libuncso2
 
+[![GitHub License](https://img.shields.io/github/license/harmonytf/libuncso2)](https://raw.githubusercontent.com/harmonytf/libuncso2/master/COPYING)
+[![GitHub Release](https://img.shields.io/github/v/release/harmonytf/libuncso2)](https://github.com/harmonytf/libuncso2/releases/latest)
+[![AUR Version](https://img.shields.io/aur/version/libuncso2?logo=archlinux)](https://aur.archlinux.org/packages/libuncso2)
+[![AUR-BIN Version](https://img.shields.io/aur/version/libuncso2-bin?logo=archlinux&label=aur-bin)](https://aur.archlinux.org/packages/libuncso2-bin)
+
 A library to decrypt and parse PKG files used by Nexon's videogame Counter-Strike Online 2.
 
 PKG is an encrypted archive file format used in Counter-Strike Online 2 and Titanfall Online to store the games' file data.
